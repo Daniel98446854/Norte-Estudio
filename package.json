@@ -1,0 +1,24 @@
+{
+  "name": "norte-ecommerce",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,storefront -c green,blue \"npm:dev:api\" \"npm:dev:storefront\"",
+    "dev:api": "npm run start:dev --workspace @shop/api",
+    "dev:storefront": "npm run dev --workspace @shop/storefront",
+    "build": "npm run build --workspace @shop/api && npm run build --workspace @shop/storefront",
+    "lint": "npm run lint --workspace @shop/api && npm run lint --workspace @shop/storefront",
+    "test": "npm run test --workspace @shop/api",
+    "test:e2e": "npm run test:e2e --workspace @shop/api",
+    "db:generate": "npm run generate --workspace @shop/database",
+    "db:migrate": "npm run migrate --workspace @shop/database",
+    "db:studio": "npm run studio --workspace @shop/database"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
